@@ -1,10 +1,37 @@
-import EventsList from "../../components/EventsList";
+import { useEffect, useState } from 'react';
 
-const DUMMY_EVENTS = [
-  { id: "event1", image: null, title: "dummy_title", date: "01-01-2025" },
-  { id: "event2", image: null, title: "swag", date: "25-05-2020" },
-];
+import EventsList from '../../components/EventsList';
 
-export default function EventsListPage() {
-  return <EventsList events={DUMMY_EVENTS} />;
+function EventsPage() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [fetchedEvents, setFetchedEvents] = useState();
+  const [error, setError] = useState();
+
+  useEffect(() => {
+    async function fetchEvents() {
+      setIsLoading(true);
+      const response = await fetch('http://localhost:8080/events');
+
+      if (!response.ok) {
+        setError('Fetching events failed.');
+      } else {
+        const resData = await response.json();
+        setFetchedEvents(resData.events);
+      }
+      setIsLoading(false);
+    }
+
+    fetchEvents();
+  }, []);
+  return (
+    <>
+      <div style={{ textAlign: 'center' }}>
+        {isLoading && <p>Loading...</p>}
+        {error && <p>{error}</p>}
+      </div>
+      {!isLoading && fetchedEvents && <EventsList events={fetchedEvents} />}
+    </>
+  );
 }
+
+export default EventsPage;
