@@ -1,13 +1,24 @@
-import { useParams, Link } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
+
+import EventItem from "../../components/EventItem";
 
 export default function EventDetailPage() {
-  const params = useParams();
-  return (
-    <>
-      <h3>{params.id}</h3>
-      <p>
-        <Link to="edit">Edit</Link>
-      </p>
-    </>
-  );
+  const data = useLoaderData();
+
+  return <EventItem event={data.event} />;
+}
+
+export async function loader({ request, params }) {
+  const id = params.id;
+
+  const response = await fetch(`http://192.168.1.18:8080/events/${id}`);
+
+  if (!response.ok) {
+    throw new Response(
+      JSON.stringify({ message: "Could not fetch the event details data." }),
+      { status: 500 }
+    );
+  } else {
+    return response;
+  }
 }
