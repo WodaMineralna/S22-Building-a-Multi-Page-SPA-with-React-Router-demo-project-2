@@ -47,7 +47,7 @@ function EventForm({ method, event }) {
           name="description"
           rows="5"
           required
-          defaultValue={event.description}
+          defaultValue={event?.description}
         />
       </p>
       <div className={classes.actions}>
