@@ -21,7 +21,9 @@ export default function ErrorPage() {
   return (
     <>
       <MainNavigation />
-      <PageContent title={title}>{message}</PageContent>
+      <PageContent title={title}>
+        <p>{message}</p>
+      </PageContent>
     </>
   );
 }
