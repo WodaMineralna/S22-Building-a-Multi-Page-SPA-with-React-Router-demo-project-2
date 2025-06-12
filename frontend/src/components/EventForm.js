@@ -7,7 +7,7 @@ import {
 
 import classes from "./EventForm.module.css";
 
-function EventForm({ method, event }) {
+export default function EventForm({ method, event }) {
   const navigate = useNavigate();
   const navigation = useNavigation();
   const data = useActionData();
@@ -19,7 +19,7 @@ function EventForm({ method, event }) {
   }
 
   return (
-    <Form method="post" className={classes.form}>
+    <Form method={method} className={classes.form}>
       {data && data.errors && (
         <ul>
           {Object.values(data.errors).map((err) => (
@@ -78,5 +78,3 @@ function EventForm({ method, event }) {
     </Form>
   );
 }
-
-export default EventForm;
