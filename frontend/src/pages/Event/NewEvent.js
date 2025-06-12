@@ -28,5 +28,5 @@ export async function action({ request, params }) {
     );
   }
 
-  return redirect("..");
+  return redirect("/events");
 }
