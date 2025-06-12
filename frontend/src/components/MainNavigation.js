@@ -1,4 +1,7 @@
 import { NavLink } from "react-router-dom";
+
+import NewsletterSignup from "./NewsletterSignup";
+
 import classes from "./MainNavigation.module.css";
 
 function MainNavigation() {
@@ -28,6 +31,7 @@ function MainNavigation() {
           </li>
         </ul>
       </nav>
+      <NewsletterSignup />
     </header>
   );
 }

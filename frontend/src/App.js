@@ -33,6 +33,7 @@ import EventDetailPage, {
 } from "./pages/Event/EventDetail";
 import EditEventPage from "./pages/Event/EditEvent";
 import { eventAction as manipulateEventAction } from "./util/actions";
+import NewsletterPage, { action as newsletterAction } from "./pages/Newsletter";
 
 const router = createBrowserRouter([
   {
@@ -73,6 +74,11 @@ const router = createBrowserRouter([
             ],
           },
         ],
+      },
+      {
+        path: "newsletter",
+        element: <NewsletterPage />,
+        action: newsletterAction,
       },
     ],
   },
