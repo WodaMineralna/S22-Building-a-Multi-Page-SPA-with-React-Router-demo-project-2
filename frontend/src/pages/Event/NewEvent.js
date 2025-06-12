@@ -21,6 +21,11 @@ export async function action({ request, params }) {
     body: JSON.stringify(eventData),
   });
 
+  // 422 - invalid form values
+  if (response.status === 422) {
+    return response;
+  }
+
   if (!response.ok) {
     throw new Response(
       JSON.stringify({ message: "Could not create a new event." }),
